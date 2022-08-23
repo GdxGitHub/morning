@@ -17,12 +17,13 @@ app_secret = os.environ["APP_SECRET"]
 user_ids = os.environ["USER_ID"].split("\n")
 template_id = os.environ["TEMPLATE_ID"]
 
-
+'''
 def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
   res = requests.get(url).json()
   weather = res['data']['list'][0]
   return weather['weather'], math.floor(weather['temp']), math.floor(weather['high']), math.floor(weather['low'])
+  '''
 
 def get_all():
   url = "https://v0.yiketianqi.com/api?unescape=1&version=v62&appid=88969948&appsecret=9HzeaQdq&city=" + city
@@ -67,7 +68,8 @@ data = {"date":{"value":date},"city":{"value":city},
         "chuanyi_tips":{"value":chuanyi_tips},"ziwaixian_level":{"value":ziwaixian_level},
         "ziwaixian_tips":{"value":ziwaixian_tips},"love_days":{"value":get_count()},
         "words":{"value":get_words(), "color":get_random_color()},
-        "birthday_left":{"value":get_birthday()}}
+        "birthday_left":{"value":get_birthday()},
+       "birthday_left":{"value":get_birthday(),"color":get_random_color()}}
 
 count = 0
 for user_id in user_ids:
