@@ -24,6 +24,13 @@ def get_weather():
   weather = res['data']['list'][0]
   return weather['weather'], math.floor(weather['temp']), math.floor(weather['high']), math.floor(weather['low'])
 
+def get_all():
+  url = "https://v0.yiketianqi.com/api?unescape=1&version=v62&appid=88969948&appsecret=9HzeaQdq&city=" + city
+  res = requests.get(url).json()
+  zhishu = res['zhishu']
+  
+  return res['date'], res['week'], res['wea'], res['tem'], res['tem1'], res['tem2'], res['humidity'], res['air_level'], zhishu['chuanyi']['level'], zhishu['chuanyi']['tips'], zhishu['ziwaixian']['level'], zhishu['ziwaixian']['tips']
+
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
   return delta.days
@@ -47,8 +54,21 @@ def get_random_color():
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
+'''
 wea, temperature, highest, lowest = get_weather()
 data = {"weather":{"value":wea,"color":get_random_color()},"temperature":{"value":temperature,"color":get_random_color()},"love_days":{"value":get_count(),"color":get_random_color()},"birthday_left":{"value":get_birthday(),"color":get_random_color()},"words":{"value":get_words(),"color":get_random_color()},"highest": {"value":highest,"color":get_random_color()},"lowest":{"value":lowest, "color":get_random_color()}}
+'''
+date, week, wea, tem, tem_low, tem_high, hum, air_level, chuanyi_level, chuanyi_tips, ziwaixian_level, ziwaixian_tips = get_all()
+data = {"date":{"value":date},"city":{"value":city},
+        "week":{"value":week},"weather":{"value":wea},
+        "temperature":{"value":tem},"min_temperature":{"value":tem_low},
+        "max_temperature":{"value":tem_high},"humidity":{"value":hum},
+        "air_level":{"value":air_level},"chuanyi_level":{"value":chuanyi_level},
+        "chuanyi_tips":{"value":chuanyi_tips},"ziwaixian_level":{"value":ziwaixian_level},
+        "ziwaixian_tips":{"value":ziwaixian_tips},"love_days":{"value":get_count()},
+        "birthday_left":{"value":get_birthday(), "color":get_random_color()},
+        "words":{"value":get_words(), "color":get_random_color()}}
+
 count = 0
 for user_id in user_ids:
   res = wm.send_template(user_id, template_id, data)
