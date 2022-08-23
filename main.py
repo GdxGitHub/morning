@@ -68,7 +68,6 @@ data = {"date":{"value":date},"city":{"value":city},
         "chuanyi_tips":{"value":chuanyi_tips},"ziwaixian_level":{"value":ziwaixian_level},
         "ziwaixian_tips":{"value":ziwaixian_tips},"love_days":{"value":get_count()},
         "words":{"value":get_words(), "color":get_random_color()},
-        "birthday_left":{"value":get_birthday()},
        "birthday_left":{"value":get_birthday(),"color":get_random_color()}}
 
 count = 0
