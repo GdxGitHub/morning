@@ -56,10 +56,10 @@ client = WeChatClient(app_id, app_secret)
 wm = WeChatMessage(client)
 
 we, temperature, highest, lowest = get_weather()
-'''
+date, week, wea, tem, tem_low, tem_high, hum, air_level, chuanyi_level, chuanyi_tips, ziwaixian_level, ziwaixian_tips = get_all()
+
 data = {"weather":{"value":wea,"color":get_random_color()},"temperature":{"value":temperature,"color":get_random_color()},"love_days":{"value":get_count(),"color":get_random_color()},"birthday_left":{"value":get_birthday(),"color":get_random_color()},"words":{"value":get_words(),"color":get_random_color()},"highest": {"value":highest,"color":get_random_color()},"lowest":{"value":lowest, "color":get_random_color()}}
 '''
-date, week, wea, tem, tem_low, tem_high, hum, air_level, chuanyi_level, chuanyi_tips, ziwaixian_level, ziwaixian_tips = get_all()
 data = {"date":{"value":date},"city":{"value":city},
         "week":{"value":week},"weather":{"value":wea},
         "temperature":{"value":tem},"min_temperature":{"value":tem_low},
@@ -69,7 +69,7 @@ data = {"date":{"value":date},"city":{"value":city},
         "ziwaixian_tips":{"value":ziwaixian_tips},"love_days":{"value":get_count()},
         "words":{"value":get_words(), "color":get_random_color()},
        "birthday_left":{"value":get_birthday(),"color":get_random_color()}}
-
+'''
 count = 0
 for user_id in user_ids:
   res = wm.send_template(user_id, template_id, data)
