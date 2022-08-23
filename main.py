@@ -65,7 +65,7 @@ data = {"date":{"value":date},"city":{"value":city},
         "max_temperature":{"value":tem_high},"humidity":{"value":hum},
         "air_level":{"value":air_level},"chuanyi_level":{"value":chuanyi_level},
         "chuanyi_tips":{"value":chuanyi_tips},"ziwaixian_level":{"value":ziwaixian_level},
-        "ziwaixian_tips":{"value":ziwaixian_tips},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday(),"color":get_random_color()},
+        "ziwaixian_tips":{"value":ziwaixian_tips},"love_days":{"value":get_count()},
         "words":{"value":get_words(), "color":get_random_color()}}
 
 count = 0
